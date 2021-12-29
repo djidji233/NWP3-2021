@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Permission {

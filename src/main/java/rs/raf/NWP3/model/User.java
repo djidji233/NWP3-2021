@@ -10,17 +10,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String first_name;
+    @Column(name = "first_name", length = 32)
+    private String firstName;
 
-    @Column
-    private String last_name;
+    @Column(name = "last_name", length = 32)
+    private String lastName;
 
     @Column(unique = true)
     private String email;
@@ -28,7 +29,8 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     @JsonIgnore
     private List<Permission> permissions;
 
