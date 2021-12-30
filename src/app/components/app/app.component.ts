@@ -11,7 +11,7 @@ export class AppComponent {
 
 
   constructor(private loginService : LoginService) {
-      localStorage.setItem('token', 'djyhawgdawgd')
+      //localStorage.setItem('token', 'djyhawgdawgd')
   }
 
 }

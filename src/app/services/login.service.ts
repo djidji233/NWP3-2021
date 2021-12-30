@@ -1,27 +1,35 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {map} from "rxjs";
+import {LoginResponse} from "../model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService implements OnDestroy {
 
-  private token: string | null;
+  private readonly loginUrl = 'http://localhost:8080/auth/login';
 
-  constructor() {
-      this.token = localStorage.getItem('token');
+  constructor(private http: HttpClient) {
   }
 
-  setToken(tkn: string): void{
-    this.token = tkn;
+  ngOnDestroy(): void {
+    this.logout()
   }
 
-  getToken(): string {
-    return <string>this.token;
+  login(email:string, password:string) {
+    return this.http.post<LoginResponse>(this.loginUrl, {
+      email: email,
+      password: password
+     }).subscribe(response => {
+      console.log(response.jwt)
+      localStorage.setItem('jwt', JSON.stringify(response.jwt))
+
+    })
   }
 
-  login(email:string,password:string){
-    // pozove backend
-    this.setToken('responseee')
-  }
 
+  logout() {
+    localStorage.removeItem("jwt")
+  }
 }

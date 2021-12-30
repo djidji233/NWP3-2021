@@ -21,11 +21,11 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (localStorage.getItem('token') != null) {
+    if (localStorage.getItem('jwt') != null) {
       return true;
     }
 
-    this.router.navigate(['/auth/login'])
+    this.router.navigate([''])
     return false;
 
   }
