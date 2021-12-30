@@ -9,26 +9,20 @@ export enum PermissionType {
   CAN_DELETE_USERS
 }
 
-export class Permission {
-  constructor(public id:number,
-              public type: PermissionType,
-              public value: boolean,
-              public user: User) {
-  }
+export interface Permission {
+  id: number,
+  type: PermissionType,
+  value: boolean,
+  user: User
+
+
 }
 
-export class User {
-  constructor(public id: number,
-              public firstName: string,
-              public lastName: string,
-              public email: string,
-              public password: string,
-              public permissions: Permission[]) {
-
-  }
-
-  getPermissions(): Permission[] {
-    return this.permissions
-  }
-
+export interface User {
+  id: number,
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+  permissions: Permission[]
 }

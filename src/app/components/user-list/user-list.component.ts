@@ -12,6 +12,7 @@ import {User} from "../../model";
 export class UserListComponent implements OnInit {
 
   public users: User[];
+  // public permissions = [];
 
   // Pomocu parametra u konstruktoru injektujemo UserService instancu u UserListComponent
   constructor(private userService: UserService) {
@@ -26,6 +27,7 @@ export class UserListComponent implements OnInit {
     this.userService.fetchUsers().subscribe(users => {
       console.log(users);
       this.users = users;
+      console.log(users[0].permissions)
     });
   }
 
