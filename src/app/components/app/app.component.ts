@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {LoginService} from "../../services/login.service";
 
 @Component({
@@ -6,12 +6,16 @@ import {LoginService} from "../../services/login.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
 
 
 
   constructor(private loginService : LoginService) {
       //localStorage.setItem('token', 'djyhawgdawgd')
+  }
+
+  ngOnDestroy(): void {
+    this.loginService.logout()
   }
 
 }

@@ -24,7 +24,6 @@ export class LoginService implements OnDestroy {
      }).subscribe(response => {
       console.log(response.jwt)
       localStorage.setItem('jwt', JSON.stringify(response.jwt))
-
     })
   }
 
