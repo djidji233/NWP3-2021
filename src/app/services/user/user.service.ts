@@ -32,19 +32,22 @@ export class UserService {
     return this.users;
   }
 
-  // public updateUser(credentials): Observable<User> {
-  //   let user: Observable<User> = this.http.put<User>(this.usersUrl, {
-  //     'id': credentials.userId,
-  //     'firstName': credentials.userFirstName,
-  //     'lastName': credentials.userLastName
-  //   }, {
-  //     headers: {
-  //       Authorization: this.authorization
-  //     }
-  //   });
-  //   return user;
-  // }
-  //
+  public updateUser(id:number,firstName:string,lastName:string,email:string,password:string,permissions:PermissionClass[]): Observable<User> {
+      let user: Observable<User> = this.http.put<User>(this.usersUrl, {
+        'id':id,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email':email,
+        'password':password,
+        'permissions':permissions
+      }, {
+        headers: {
+          Authorization: this.authorization
+        }
+      });
+      return user;
+    }
+
   public addUser(firstName:string,lastName:string,email:string,password:string,permissions:PermissionClass[]): Observable<User> {
     let user: Observable<User> = this.http.post<User>(this.usersUrl, {
       'firstName': firstName,
