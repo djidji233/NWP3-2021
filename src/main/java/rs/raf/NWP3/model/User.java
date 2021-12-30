@@ -47,4 +47,10 @@ public class User {
         }
     }
 
+    public void removeAllPermissions(){
+        if(permissions!=null){ // znaci da je update a ne prvi upis
+            permissions = new ArrayList<>();
+        }
+    }
+
 }
