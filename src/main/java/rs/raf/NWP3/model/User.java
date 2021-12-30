@@ -33,7 +33,7 @@ public class User {
     @OneToMany(mappedBy = "user",
             cascade = {CascadeType.MERGE, CascadeType.REFRESH},
             fetch = FetchType.EAGER)
-    @JsonIgnore
+//    @JsonIgnore
     private List<Permission> permissions;
 
 }
