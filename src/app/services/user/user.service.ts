@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {User} from "../../model";
+import {first, Observable} from 'rxjs';
+import {Permission, PermissionClass, User} from "../../model";
 
 // Injectable omogucava dependancy injection https://angular.io/guide/dependency-injection
 // providedIn oznacava na kom nivou ce biti dostupna instanca ovog servisa
@@ -45,17 +45,19 @@ export class UserService {
   //   return user;
   // }
   //
-  // public addUser(credentials): Observable<User> {
-  //   let user: Observable<User> = this.http.post<User>(this.usersUrl, {
-  //     'id': Math.floor(Math.random() * 1000),
-  //     'firstName': credentials.userFirstName,
-  //     'lastName': credentials.userLastName
-  //   }, {
-  //     headers: {
-  //       Authorization: this.authorization
-  //     }
-  //   });
-  //   return user;
-  // }
+  public addUser(firstName:string,lastName:string,email:string,password:string,permissions:PermissionClass[]): Observable<User> {
+    let user: Observable<User> = this.http.post<User>(this.usersUrl, {
+      'firstName': firstName,
+      'lastName': lastName,
+      'email':email,
+      'password':password,
+      'permissions':permissions
+    }, {
+      headers: {
+        Authorization: this.authorization
+      }
+    });
+    return user;
+  }
 
 }

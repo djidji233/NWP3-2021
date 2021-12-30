@@ -14,8 +14,12 @@ export interface Permission {
   type: PermissionType,
   value: boolean,
   user: User
+}
 
-
+export class PermissionClass {
+  constructor(public type: PermissionType,
+              public value: boolean) {
+  }
 }
 
 export interface User {
@@ -25,4 +29,13 @@ export interface User {
   email: string,
   password: string,
   permissions: Permission[]
+}
+
+export class UserClass {
+  constructor(public firstName: string,
+              public lastName: string,
+              public email: string,
+              public password: string,
+              public permissions: PermissionClass[]) {
+  }
 }
