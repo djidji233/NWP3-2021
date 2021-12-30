@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,9 +32,19 @@ public class User {
 
 
     @OneToMany(mappedBy = "user",
-            cascade = {CascadeType.MERGE, CascadeType.REFRESH},
-            fetch = FetchType.EAGER)
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
 //    @JsonIgnore
     private List<Permission> permissions;
+
+    public void addPermission(Permission permission){
+        if (permission != null) {
+            if (permissions == null) {
+                permissions = new ArrayList<Permission>();
+            }
+            permissions.add(permission);
+            permission.setUser(this);
+        }
+    }
 
 }
