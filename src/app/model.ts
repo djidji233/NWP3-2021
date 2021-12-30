@@ -32,10 +32,13 @@ export interface User {
 }
 
 export class UserClass {
+  permissions: PermissionClass[] = [];
   constructor(public firstName: string,
               public lastName: string,
               public email: string,
-              public password: string,
-              public permissions: PermissionClass[]) {
+              public password: string) {
+  }
+  addPermission(permission: PermissionClass){
+    this.permissions.push(permission)
   }
 }

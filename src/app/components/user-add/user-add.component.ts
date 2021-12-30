@@ -41,7 +41,11 @@ export class UserAddComponent implements OnInit {
     let deletepermission = new PermissionClass(PermissionType.CAN_DELETE_USERS, deletep)
     let permissions = []
     permissions.push(createpermission, readpermission, updatepermission, deletepermission)
-    let user = new UserClass(firstName, lastName, email, password,permissions)
+    // let user = new UserClass(firstName, lastName, email, password)
+    // user.addPermission(createpermission)
+    // user.addPermission(readpermission)
+    // user.addPermission(updatepermission)
+    // user.addPermission(deletepermission)
     this.userService.addUser(firstName, lastName, email, password,permissions).subscribe(user=>{
       console.log(user)
     })
