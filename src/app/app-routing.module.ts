@@ -14,7 +14,7 @@ const routes: Routes = [
   // http://localhost:4200/users/add
   { path: 'users/add', component: UserAddComponent, canActivate: [AuthGuard]},
   // http://localhost:4200/users/edit/{id}
-  { path: 'users/edit/{id}', component: UserEditComponent, canActivate: [AuthGuard]},
+  { path: 'users/edit/:id', component: UserEditComponent, canActivate: [AuthGuard]},
 
 ];
 
