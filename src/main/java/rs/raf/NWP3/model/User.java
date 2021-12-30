@@ -30,7 +30,9 @@ public class User {
     private String password;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "user",
+            cascade = {CascadeType.MERGE, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Permission> permissions;
 
