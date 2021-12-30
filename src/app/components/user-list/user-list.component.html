@@ -1,1 +1,25 @@
-<p>user-list works!</p>
+
+<div class="col-sm-4">
+  <h1>Users</h1>
+  <hr>
+  <table>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Edit</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <!-- rounterLink uzima za vrednost niz, prvi parametar u nizu je string,
+          drugi je number i bice konkatenirani da bi se dobio url -->
+      <td><input type="button" [routerLink]="['/users/edit',user.id]" value="Edit"></td>
+    </tr>
+  </table>
+</div>
+<hr>
+
+<hr>
+

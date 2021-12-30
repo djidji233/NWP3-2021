@@ -23,7 +23,7 @@ export class LoginService implements OnDestroy {
       password: password
      }).subscribe(response => {
       console.log(response.jwt)
-      localStorage.setItem('jwt', JSON.stringify(response.jwt))
+      localStorage.setItem('jwt', response.jwt)
     })
   }
 

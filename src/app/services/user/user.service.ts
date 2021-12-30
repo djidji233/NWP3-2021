@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../models/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {User} from "../../model";
 
 // Injectable omogucava dependancy injection https://angular.io/guide/dependency-injection
 // providedIn oznacava na kom nivou ce biti dostupna instanca ovog servisa
@@ -11,12 +11,12 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-  private readonly usersUrl = 'http://localhost:8080/users';
+  private readonly usersUrl = 'http://localhost:8080/api/users';
   private authorization = 'Bearer ' + localStorage.getItem('jwt');
   private users: Observable<User[]>;
 
   constructor(private http: HttpClient) {
-
+      this.users = new Observable<[]>();
   }
 
   public getUsers(): Observable<User[]> {
@@ -32,40 +32,30 @@ export class UserService {
     return this.users;
   }
 
-  public removeUser(id: number): Observable<User> {
-    let user: Observable<User> = this.http.delete<User>(this.usersUrl + '/' + id, {
-      params: {}, headers: {
-        Authorization: this.authorization
-      }
-    });
-    console.log('http DELETE id=' + id);
-    return user;
-  }
-
-  public updateUser(credentials): Observable<User> {
-    let user: Observable<User> = this.http.put<User>(this.usersUrl, {
-      'id': credentials.userId,
-      'firstName': credentials.userFirstName,
-      'lastName': credentials.userLastName
-    }, {
-      headers: {
-        Authorization: this.authorization
-      }
-    });
-    return user;
-  }
-
-  public addUser(credentials): Observable<User> {
-    let user: Observable<User> = this.http.post<User>(this.usersUrl, {
-      'id': Math.floor(Math.random() * 1000),
-      'firstName': credentials.userFirstName,
-      'lastName': credentials.userLastName
-    }, {
-      headers: {
-        Authorization: this.authorization
-      }
-    });
-    return user;
-  }
+  // public updateUser(credentials): Observable<User> {
+  //   let user: Observable<User> = this.http.put<User>(this.usersUrl, {
+  //     'id': credentials.userId,
+  //     'firstName': credentials.userFirstName,
+  //     'lastName': credentials.userLastName
+  //   }, {
+  //     headers: {
+  //       Authorization: this.authorization
+  //     }
+  //   });
+  //   return user;
+  // }
+  //
+  // public addUser(credentials): Observable<User> {
+  //   let user: Observable<User> = this.http.post<User>(this.usersUrl, {
+  //     'id': Math.floor(Math.random() * 1000),
+  //     'firstName': credentials.userFirstName,
+  //     'lastName': credentials.userLastName
+  //   }, {
+  //     headers: {
+  //       Authorization: this.authorization
+  //     }
+  //   });
+  //   return user;
+  // }
 
 }
