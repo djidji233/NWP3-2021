@@ -28,6 +28,14 @@ public class UserService implements IService<User,Long>, UserDetailsService {
     @Override
     public <S extends User> S save(S var1) {
 
+        List<Permission> allP = permissionRepository.findAll();
+        for(Permission p : allP){
+            if(p.getUser().getId().equals(var1.getId())){
+                p.setUser(null);
+                permissionRepository.delete(p);
+            }
+        }
+
 //        List<Permission> inDB = permissionRepository.findAllByUser(var1);
 //        for(Permission p : inDB){
 //            permissionRepository.delete(p);

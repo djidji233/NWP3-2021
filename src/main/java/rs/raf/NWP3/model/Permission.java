@@ -25,7 +25,7 @@ public class Permission {
     @Column
     private boolean value;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @JsonIgnore
     private User user;
