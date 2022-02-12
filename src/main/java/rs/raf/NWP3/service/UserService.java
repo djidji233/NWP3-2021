@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import rs.raf.NWP3.model.Permission;
 import rs.raf.NWP3.model.User;
@@ -18,15 +19,19 @@ import java.util.Optional;
 public class UserService implements IService<User,Long>, UserDetailsService {
     private final UserRepository userRepository;
     private final PermissionRepository permissionRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PermissionRepository permissionRepository) {
+    public UserService(UserRepository userRepository, PermissionRepository permissionRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.permissionRepository = permissionRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public <S extends User> S save(S var1) {
+
+        passwordEncoder.encode(var1.getPassword());
 
         List<Permission> allP = permissionRepository.findAll();
         for(Permission p : allP){
